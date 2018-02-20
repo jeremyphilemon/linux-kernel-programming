@@ -1,0 +1,1 @@
+cmd_/home/jessie/code/display-your-name.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/jessie/code/display-your-name.ko /home/jessie/code/display-your-name.o /home/jessie/code/display-your-name.mod.o
