@@ -1,5 +1,5 @@
-TARGET = [name]
-OBJS = [name].o
+TARGET = vfs-intro
+OBJS = vfs-intro.o
 
 KDIR = /lib/modules/$(shell uname -r)/build
 PWD = $(shell pwd)

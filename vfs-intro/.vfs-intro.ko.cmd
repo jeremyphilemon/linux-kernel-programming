@@ -1,0 +1,1 @@
+cmd_/home/jessie/code/vfs-intro/vfs-intro.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/jessie/code/vfs-intro/vfs-intro.ko /home/jessie/code/vfs-intro/vfs-intro.o /home/jessie/code/vfs-intro/vfs-intro.mod.o

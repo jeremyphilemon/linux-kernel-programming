@@ -1,0 +1,1 @@
+cmd_/home/jessie/code/memory-management/memory-management.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/jessie/code/memory-management/memory-management.ko /home/jessie/code/memory-management/memory-management.o /home/jessie/code/memory-management/memory-management.mod.o

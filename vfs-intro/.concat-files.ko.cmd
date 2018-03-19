@@ -1,0 +1,1 @@
+cmd_/home/jessie/code/concat-files/concat-files.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/jessie/code/concat-files/concat-files.ko /home/jessie/code/concat-files/concat-files.o /home/jessie/code/concat-files/concat-files.mod.o
