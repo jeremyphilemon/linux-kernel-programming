@@ -1,0 +1,1 @@
+cmd_/home/jessie/code/buddy-free/buddy-free.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/jessie/code/buddy-free/buddy-free.ko /home/jessie/code/buddy-free/buddy-free.o /home/jessie/code/buddy-free/buddy-free.mod.o
