@@ -6,6 +6,8 @@
 #include <linux/timer.h>
 #include <linux/sched.h>
 #include <linux/jiffies.h>
+#include <linux/gfp.h>
+#include <linux/mm_types.h>
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Jeremy");
@@ -28,6 +30,8 @@ MODULE_DESCRIPTION("A module that implements kernel threading");
       ...
     };
 */
+
+int no_of_pages;
 
 static struct task_struct *thread_one;
 static struct task_struct *thread_two;
@@ -76,6 +80,15 @@ static int __init initFunc(void) {
   return 0;
 }
 
+void create_pages(void) {
+  unsigned long page;
+  no_of_pages = 100;
+  page = __get_free_page(GFP_KERNEL);
+  if(page) {
+    printk("%d pages have been allocated\n", no_of_pages);
+  }
+}
+
 static void __exit exitFunc(void) {
   int ret = kthread_stop(thread_one);
   if(!ret) {
@@ -85,6 +98,7 @@ static void __exit exitFunc(void) {
   if(!ret) {
     printk("Multiplication thread stopped\n");
   }
+  create_pages();
   printk("Cleaning up module\n");
 }
 
