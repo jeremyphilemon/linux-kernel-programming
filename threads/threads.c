@@ -37,7 +37,7 @@ unsigned long j_start_multiplication, j_end_multiplication, j_count_multiplicati
 
 static int thread_fn_addition(void *unused) {
   int a, b, sum;
-  printk("Inside thread creation's function\n");  
+  printk("Inside addition thread\n");
   a = 100;
   b = 200;
   sum = a+b;
@@ -49,7 +49,7 @@ static int thread_fn_addition(void *unused) {
 
 static int thread_fn_multiplication(void *unused) {
   int a, b, product;
-  printk("Inside thread creation's function\n");  
+  printk("Inside multiplication thread\n");
   a = 100;
   b = 200;
   product = a*b;
@@ -63,37 +63,29 @@ static int __init initFunc(void) {
   char thread_one_name[11] = "thread one";
   char thread_two_name[11] = "thread two";
   printk("Initialising threads module\n");
-  j_start_addition = jiffies;
   thread_one = kthread_create(thread_fn_addition, NULL, thread_one_name);
   if(thread_one) {
     printk("Thread one created successfully\n");
     wake_up_process(thread_one);
   }
-  j_start_multiplication = jiffies;
   thread_two = kthread_create(thread_fn_multiplication, NULL, thread_two_name);
   if(thread_two) {
-    printk("Thread one created successfully\n");
+    printk("Thread two created successfully\n");
     wake_up_process(thread_two);
   }
   return 0;
 }
- 
+
 static void __exit exitFunc(void) {
   int ret = kthread_stop(thread_one);
   if(!ret) {
     printk("Addition thread stopped\n");
-    j_end_addition = jiffies;
   }
-  j_count_addition = j_end_addition - j_start_addition;
-  printk("Time elapsed in milliseconds: %lu\n", (j_count_addition*1000)/HZ);
   ret = kthread_stop(thread_two);
   if(!ret) {
-    printk("Mulitpliction thread stopped\n");
-    j_end_multiplication = jiffies;
+    printk("Multiplication thread stopped\n");
   }
-  j_count_multiplication = j_end_multiplication - j_start_multiplication;
-  printk("Time elapsed in milliseconds: %lu\n", (j_count_multiplication*1000)/HZ);
-  printk("Cleaning threads module\n");
+  printk("Cleaning up module\n");
 }
 
 module_init(initFunc);
